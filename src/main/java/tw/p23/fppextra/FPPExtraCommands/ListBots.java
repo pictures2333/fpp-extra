@@ -1,11 +1,8 @@
 package tw.p23.fppextra.FPPExtraCommands;
 
-import java.util.regex.Pattern;
-
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
@@ -16,18 +13,13 @@ import com.mojang.brigadier.context.CommandContext;
 
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 
+import tw.p23.fppextra.Utility.*;
+
 public class ListBots {
-    private final JavaPlugin plugin;
-    private static final Pattern FPP_UUID = Pattern.compile(
-        "^fb07[0-9a-f]{4}-[0-9a-f]{4}-0[0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$"
-    );
+    private FilterFakePlayer filterFakePlayer;
 
-    public ListBots(JavaPlugin plugin) {
-        this.plugin = plugin;
-    }
-
-    private boolean isFakePlayer(Player player) {
-        return FPP_UUID.matcher(player.getUniqueId().toString()).matches();
+    public ListBots() {
+        this.filterFakePlayer = new FilterFakePlayer();
     }
 
     public int execute(CommandContext<CommandSourceStack> ctx) {
@@ -39,7 +31,7 @@ public class ListBots {
 
         for (World world : Bukkit.getWorlds()) {
             for (Player player : world.getEntitiesByClass(Player.class)) {
-                if (isFakePlayer(player)) {
+                if (this.filterFakePlayer.isFakePlayer(player)) {
                     counter += 1;
 
                     sender.sendMessage(Component.text("  - ", NamedTextColor.DARK_GRAY)

@@ -6,8 +6,10 @@ import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import tw.p23.fppextra.FPPExtraCommands.*;
+import tw.p23.fppextra.Tasks.*;
 
 public final class FPPExtra extends JavaPlugin {
+    Task task;
 
     @Override
     public void onEnable() {
@@ -16,7 +18,7 @@ public final class FPPExtra extends JavaPlugin {
 
         // command tree
         Reload commandReload = new Reload(this);
-        ListBots commandListBot = new ListBots(this);
+        ListBots commandListBot = new ListBots();
         Status commandStatus = new Status(this);
         Switch commandSwitch = new Switch(this);
 
@@ -112,7 +114,18 @@ public final class FPPExtra extends JavaPlugin {
             }
         );
 
+        // scheduler
+        this.task = new Task(this);
+        task.start();
+
         // log
         getLogger().info("fpp-extra enabled!");
+    }
+
+    @Override
+    public void onDisable() {
+        if (this.task != null) {
+            this.task.stop();
+        }
     }
 }
