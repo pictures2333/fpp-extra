@@ -5,18 +5,26 @@ main: tw.p23.fppextra.FPPExtra
 api-version: '26.3'
 
 permissions:
+  fpp-extra.reload:
+    default: false
+  
   fpp-extra.listbots:
     default: false
+  
   fpp-extra.status:
     default: false
+  
   fpp-extra.switch:
     default: false
+  
   fpp-extra.admin:
     default: op
     children:
+      - fpp-extra.reload
       - fpp-extra.listbots
       - fpp-extra.status
       - fpp-extra.switch
+  
   fpp-extra.user:
     children:
       - fpp-extra.listbots

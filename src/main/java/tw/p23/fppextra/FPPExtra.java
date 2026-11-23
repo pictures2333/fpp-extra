@@ -15,6 +15,7 @@ public final class FPPExtra extends JavaPlugin {
         saveDefaultConfig();
 
         // command tree
+        Reload commandReload = new Reload(this);
         ListBots commandListBot = new ListBots(this);
         Status commandStatus = new Status(this);
         Switch commandSwitch = new Switch(this);
@@ -25,8 +26,15 @@ public final class FPPExtra extends JavaPlugin {
                 event.registrar().register(
                     Commands.literal("fpp-extra")
 
-                    // reload
-                    // scheduler
+                    .then(
+                        Commands.literal("reload")
+                        .requires(
+                            src -> src.getSender().hasPermission("fpp-extra.reload")
+                        )
+                        .executes(
+                            ctx -> commandReload.execute(ctx)
+                        )
+                    )
 
                     .then(
                         Commands.literal("listbots")
