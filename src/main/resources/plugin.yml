@@ -1,15 +1,23 @@
 
-name: FPPExtra
+name: fpp-extra
 version: '1.0.0'
 main: tw.p23.fppextra.FPPExtra
 api-version: '26.3'
 
-commands:
-  plugin:
-    description: Hello, World!
-    usage: /fpp-extra
-    permission: fpp-extra.admin
-
 permissions:
-  paperdemo.admin:
+  fpp-extra.listbots:
+    default: false
+  fpp-extra.status:
+    default: false
+  fpp-extra.switch:
+    default: false
+  fpp-extra.admin:
     default: op
+    children:
+      - fpp-extra.listbots
+      - fpp-extra.status
+      - fpp-extra.switch
+  fpp-extra.user:
+    children:
+      - fpp-extra.listbots
+      - fpp-extra.status
