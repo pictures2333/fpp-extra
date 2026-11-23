@@ -1,0 +1,15 @@
+
+name: FPPExtra
+version: '1.0.0'
+main: tw.p23.fppextra.FPPExtra
+api-version: '26.3'
+
+commands:
+  plugin:
+    description: Hello, World!
+    usage: /fpp-extra
+    permission: fpp-extra.admin
+
+permissions:
+  paperdemo.admin:
+    default: op

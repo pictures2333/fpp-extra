@@ -1,0 +1,17 @@
+{
+    "java.configuration.runtimes": [
+        {
+            "name": "JavaSE-25",
+            "path": "/usr/lib/jvm/java-25-openjdk",
+            "default": true
+        }
+    ],
+    "java.import.gradle.java.home": "/usr/lib/jvm/java-25-openjdk",
+    "java.import.gradle.wrapper.enabled": true,
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "yaml.schemas": {
+        "https://json.schemastore.org/bukkit-plugin.json": [
+            "src/main/resources/plugin.yml"
+        ]
+    }
+}
